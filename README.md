@@ -1,1 +1,1 @@
-# Este desafio foi realizado como uma prova de conceito e para testar habilidades técnicas em Java e Spring Boot. É uma ótima oportunidade para demonstrar conhecimentos em desenvolvimento de software, especialmente na construção de aplicações web com essas tecnologias!
+# 
