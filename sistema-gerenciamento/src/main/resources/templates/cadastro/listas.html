@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <!-- Meta tags obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+    <!-- DataTables CSS -->
+	<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+
+    <title>Cadastro de Listas</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/Administrador">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/cadastroLista">Cadastrar Lista</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cadastroItens">Cadastrar Itens</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Tabela para exibir todas as listas cadastradas -->
+    <div class="container mt-4">
+        <table id="listasTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Total de Itens</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="lista : ${listas}">
+                    <td th:text="${lista.id}"></td>
+                    <td th:text="${lista.nome}"></td>
+                    <td th:text="${lista.totalItens}"></td>
+                    <td colspan="2">
+                        <a th:href="@{/itens/{id}(id=${lista.id})}" class="btn btn-info btn-sm">Ver Itens</a>
+                        <a th:href="@{/editarLista/{id}(id=${lista.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/excluirLista/{id}(id=${lista.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- DataTables JS -->
+	  
+	<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UOa5xkcOVcAw2+owH+N6W1Z5Edk5F2G6Q+PjHpmwV6Y2bQxh5yfF5uE4P0T0sF0k"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfyyzXqKfjh5D7My9KT6RRrJ09y5ykM6pJ47B6y4u4L6FX4J6k4a4E5xfHu7TY"
+            crossorigin="anonymous"></script>
+
+    <!-- Inicialização do DataTables -->
+    <script>
+    $(document).ready( function () {
+        $('#listasTable').DataTable();
+    } );
+    </script>
+</body>
+</html>

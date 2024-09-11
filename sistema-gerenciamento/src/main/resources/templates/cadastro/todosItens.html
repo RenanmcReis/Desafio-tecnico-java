@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Itens da Lista</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        .priority-low {
+            color: blue;
+        }
+        .priority-medium {
+            color: green;
+        }
+        .priority-high {
+            color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Itens da Lista: <span th:text="${lista.nome}"></span></h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Prioridade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${itens}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.descricao}"></td>
+                    <td th:classappend="${item.prioridade == 1 ? 'priority-low' : (item.prioridade == 2 ? 'priority-medium' : 'priority-high')}" 
+                        th:text="${item.prioridade == 1 ? 'Baixa' : (item.prioridade == 2 ? 'Média' : 'Alta')}"></td>
+                    <td>
+                        <!-- Botão para editar o item -->
+                        <a th:href="@{/editarItem/{id}(id=${item.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <!-- Botão para excluir o item -->
+                        <a th:href="@{/excluirItem/{id}(id=${item.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="#" th:href="@{/listas}" class="btn btn-primary">Voltar para Listas</a>
+    </div>
+</body>
+</html>
